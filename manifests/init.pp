@@ -38,10 +38,7 @@ class thin (
 ) inherits thin::params {
 
   if $additional_packages {
-    package { $additional_packages:
-      ensure => 'installed',
-      before => Package[$package_name],
-    }
+    ensure_packages($additional_packages)
   }
 
   package { $package_name:
@@ -76,14 +73,13 @@ class thin (
   if $::thin::params::systemd {
     include ::systemd
 
-    file { '/usr/lib/systemd/system/thin@.service':
+    file { '/etc/systemd/system/thin@.service':
       owner   => root,
       group   => root,
       mode    => '0555',
       content => template('thin/thin.service.erb'),
       notify  => Exec['systemctl-daemon-reload'],
     }
-  } else {
     file { '/etc/init.d/thin':
       owner   => root,
       group   => root,

@@ -103,11 +103,11 @@ define thin::site (
   if $manage_service {
     $thin_notify = Service["thin-${name}"]
 
-    file { "/usr/lib/systemd/system/thin@${name}.service.d":
+    file { "/etc/systemd/system/thin@${name}.service.d":
       ensure  => 'directory',
     }
 
-    file { "/usr/lib/systemd/system/thin@${name}.service.d/pidfile.conf":
+    file { "/etc/systemd/system/thin@${name}.service.d/pidfile.conf":
       ensure  => file,
       owner   => root,
       group   => root,
