@@ -73,7 +73,7 @@ class thin (
   if $::thin::params::systemd {
     include ::systemd
 
-    file { '/etc/systemd/system/thin@.service':
+    file { '/etc/systemd/system/thin.service':
       owner   => root,
       group   => root,
       mode    => '0555',
