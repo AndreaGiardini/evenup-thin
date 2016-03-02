@@ -76,7 +76,7 @@ class thin (
     file { '/etc/systemd/system/thin.service':
       owner   => root,
       group   => root,
-      mode    => '0555',
+      mode    => '0644',
       content => template('thin/thin.service.erb'),
       notify  => Exec['systemctl-daemon-reload'],
     }
