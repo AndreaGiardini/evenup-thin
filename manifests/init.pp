@@ -86,6 +86,13 @@ class thin (
       mode    => '0555',
       content => template('thin/thin.init.erb'),
     }
+    service { "thin":
+      ensure  => running,
+      name    => "thin",
+      enable  => true,
+      require => File['/etc/systemd/system/thin.service'],
+    }
+    
   }
 
 }
